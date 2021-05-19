@@ -1,4 +1,4 @@
-from Controller.health_check import HealthCheck
+from Controller.health_check_controller import HealthCheck
 from flask_restful import Api
 
 
