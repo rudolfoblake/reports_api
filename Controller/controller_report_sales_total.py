@@ -1,5 +1,4 @@
 import json
-
 from flask_restful import Resource
 from flask import request
 from Database.auth import KEYS

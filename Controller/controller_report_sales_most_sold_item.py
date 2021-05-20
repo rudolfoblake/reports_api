@@ -1,6 +1,8 @@
+import json
 from flask_restful import Resource
 from flask import request
 from Database.auth import KEYS
+from Utils.utils_reports_extract_data import get_data_from_order_logs
 
 
 class ReportSalesMostSoldItem(Resource):
@@ -14,6 +16,17 @@ class ReportSalesMostSoldItem(Resource):
         else:
             body_request = {"report_header": request.get_json(), "report_body": None}
             body_request["report_header"]["title"] = "Relatório de itens mais vendidos"
-            # response = book_controller.insert_book(body_request)
-            response = dict(body_request, status=200, message="ok")
+
+            dates = dict(initial_date=body_request['report_header']['initial_date'],
+                         final_date=body_request['report_header']['final_date'])
+
+            data_info = get_data_from_order_logs(url="http://127.0.0.1:8000/orders/reports/2",
+                                                 filter_data=dates)
+
+            body_request["report_body"] = json.loads(data_info['data'])
+
+            response = dict(body_request,
+                            status=200,
+                            message="ok")
+
         return response
