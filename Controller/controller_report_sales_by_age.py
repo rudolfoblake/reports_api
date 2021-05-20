@@ -14,7 +14,7 @@ class ReportSalesByAge(Resource):
             response = dict(status=400, error="Chave de acesso inválida.", message="Verifique os dados informados.")
         else:
             body_request = {"report_header": request.get_json(), "report_body": None}
-            body_request["report_header"]["title"] = "Relatórios de vendas por faixa etária"
+            body_request["report_header"]["title"] = "Relatório de vendas por faixa etária"
 
             if body_request["report_header"]["age"] < 0 or body_request["report_header"]["age"] > 121:
                 response = dict(status=400, error="Idade inválida.", message="Verifique os dados informados.")

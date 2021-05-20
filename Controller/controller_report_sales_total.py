@@ -18,7 +18,7 @@ class ReportSalesTotal(Resource):
                             message="Verifique os dados informados.")
         else:
             body_request = {"report_header": request.get_json(), "report_body": None}
-            body_request["report_header"]["title"] = "Relatórios geral de vendas"
+            body_request["report_header"]["title"] = "Relatório geral de vendas"
 
             dates = dict(initial_date=body_request['report_header']['initial_date'],
                          final_date=body_request['report_header']['final_date'])
