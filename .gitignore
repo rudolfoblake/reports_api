@@ -128,5 +128,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# Keys
-reports_api/Database/auth.py
+# KEYS
+
+Database/auth.py
