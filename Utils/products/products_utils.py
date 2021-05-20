@@ -26,6 +26,5 @@ def calculate_profit_by_product(data_values):
             total_margin = round(item["profit_margin"], 2)
             item["profit_margin"] = f"{total_margin}%"
             list_response.append(item)
-    print(list_response)
     return list_response
 

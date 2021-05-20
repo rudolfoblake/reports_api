@@ -17,6 +17,8 @@ def init_api(app):
     api.add_resource(HealthCheck, "/health-check")
     api.add_resource(ControllerProductReportStock, "/reports/product/stock-report")
     api.add_resource(ControllerProductReportProfit, "/reports/product/profit-report")
-    
+    api.add_resource(ControllerLoggedInUserSearchReport, "/reports/product/profit-report")
+    api.add_resource(ControllerNotLoggedUserSearchReport, "/reports/product/profit-report")
+
 
     api.init_app(app)
