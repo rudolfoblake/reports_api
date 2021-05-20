@@ -129,4 +129,4 @@ dmypy.json
 .pyre/
 
 # Keys
-API_Products/database/auth.py
+reports_api/Database/auth.py
