@@ -6,8 +6,11 @@ def get_all_products_with_empty_stock():
     response = response.json()
     list_response = []
     for item in response["result_data"]:
-        if item["item_quantity"] == 0:
-            list_response.append(item)
+        try:
+            if item["item_quantity"] == 0:
+                list_response.append(item)
+        except KeyError:
+            pass
     return list_response
 
 
