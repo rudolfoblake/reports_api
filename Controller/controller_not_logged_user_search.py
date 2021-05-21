@@ -22,9 +22,7 @@ class ControllerNotLoggedUserSearchReport(Resource):
             body_request["report_header"]["title"] = "Relatórios de tags mais pesquisadas por usuários não logados"
             current_date = datetime.today()
             body_request["report_header"]["current_date"] = current_date.strftime("%d/%m/%Y, %H:%M")
-            print(request)
             request_body = request.get_json(force=True)
-            print(request_body)
             dates = dict(initial_date=request_body["initial_date"], final_date=request_body["final_date"])
             body_request["report_body"] = search_engine_utils.get_not_logged_users_report(dates)
             response = dict(body_request, status=200, message="ok")
