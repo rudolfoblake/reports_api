@@ -2,7 +2,7 @@ import json
 from flask_restful import Resource
 from flask import request
 from Database.auth import KEYS
-from Utils.utils_reports_extract_data import get_data_from_order_logs
+from Utils.sales.utils_reports_extract_data import get_data_from_order_logs
 
 
 class ReportSalesTotal(Resource):
