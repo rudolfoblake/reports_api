@@ -25,7 +25,7 @@ class ReportSalesMostSoldItem(Resource):
                                                  filter_data=dates)
 
             if data_info["status"] is False:
-                response = dict(status=500, error="Dados incorretos", message=data_info["message"])
+                response = dict(status=500, error="Dados incorretos.", message=data_info["message"])
             else:
                 try:
                     result_list = convert_log_data(json.loads(data_info["data"]))
@@ -37,6 +37,6 @@ class ReportSalesMostSoldItem(Resource):
                 except KeyError:
                     response = dict(status=400,
                                     error="Chave inválida.",
-                                    message="Problema na lista de produtos")
+                                    message="Problema na lista de produtos.")
 
         return response
