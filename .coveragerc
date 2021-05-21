@@ -1,0 +1,9 @@
+[run]
+omit =
+    app.py
+    endpoints.py
+    __init__.py
+    Controller/*
+    Tests/*
+    Utils\__init__.py
+    Utils\sales\__init__.py
