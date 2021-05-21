@@ -1,3 +1,5 @@
+from Controller.controller_logged_user_search import ControllerLoggedInUserSearchReport
+from Controller.controller_not_logged_user_search import ControllerNotLoggedUserSearchReport
 from Controller.health_check_controller import HealthCheck
 from Controller.controller_product_profit import ControllerProductReportProfit
 from Controller.controller_product_stock import ControllerProductReportStock
@@ -17,8 +19,8 @@ def init_api(app):
     api.add_resource(HealthCheck, "/health-check")
     api.add_resource(ControllerProductReportStock, "/reports/product/stock-report")
     api.add_resource(ControllerProductReportProfit, "/reports/product/profit-report")
-    api.add_resource(ControllerLoggedInUserSearchReport, "/reports/product/profit-report")
-    api.add_resource(ControllerNotLoggedUserSearchReport, "/reports/product/profit-report")
+    api.add_resource(ControllerLoggedInUserSearchReport, "/reports/searches/logged-users")
+    api.add_resource(ControllerNotLoggedUserSearchReport, "/reports/searches/not-logged-users")
 
 
     api.init_app(app)

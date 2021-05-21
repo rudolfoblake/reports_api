@@ -13,3 +13,4 @@ class ControllerLoggedInUserSearchReport(Resource):
             response = dict(status=400, error="Chave de acesso inválida.", message="Verifique os dados informados.")
         else:
             pass
+        return response
