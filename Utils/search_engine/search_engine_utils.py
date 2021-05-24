@@ -1,64 +1,46 @@
 import requests
 import operator
 
-# Pega todos as buscas de usuários não logados
+GET_LOGGED_USERS_REPORT = 1
+GET_NOT_LOGGED_USERS_REPORT = 0
+SEARCH_TYPE_LIST = [GET_LOGGED_USERS_REPORT, GET_NOT_LOGGED_USERS_REPORT]
 
 
-def get_all_searches_by_not_loged_user(dates: dict):
-
+# Pega todos as buscas de usuários logados e não logados de acrodo com a Constante informada (search_type).
+def get_all_searches(dates, search_type):
     response = requests.post("http://127.0.0.1:5000/get_all_searches", json=dates)
     response = response.json()
-    not_logged_user_list = []
-    for item in response:
-        try:
-            if item["user_id"]:
-                pass
-        except KeyError:
-            not_logged_user_list.append(item)
-    return not_logged_user_list
+    searches_list = []
+
+    if search_type == GET_LOGGED_USERS_REPORT:
+        for item in response:
+            if "user_id" in item.keys():
+                searches_list.append(item)
+    elif search_type == GET_NOT_LOGGED_USERS_REPORT:
+        for item in response:
+            if not "user_id" in item.keys():
+                searches_list.append(item)
+    return searches_list
 
 
-# Pega todos as buscas de usuários logados
-def get_all_searches_by_logged_users(dates: dict):
-    response = requests.post("http://127.0.0.1:5000/get_all_searches", json=dates)
-    response = response.json()
-    logged_user_list = []
-    for item in response:
-        try:
-            if item["user_id"]:
-                logged_user_list.append(item)
-        except KeyError:
-            pass
-    return logged_user_list
-
-
-# Pega as categorias da lista de usuarios não logados
-def get_categories_of_not_logged_users(dates):
+# Recebe a lista de pesquisas, e de acordo com search_type retorna as categorias dos logados e não logados.
+def get_categories(dates, search_type):
     category_list = []
-    searches_list = get_all_searches_by_not_loged_user(dates)
-    for item in searches_list:
-        try:
-            if item["category"]:
+    if search_type == GET_LOGGED_USERS_REPORT:
+        searches_list = get_all_searches(dates, search_type)
+        for item in searches_list:
+            if "category" in item.keys():
                 category_list.append(item["category"])
-        except KeyError:
-            pass
+
+    elif search_type == GET_NOT_LOGGED_USERS_REPORT:
+        searches_list = get_all_searches(dates, search_type)
+        for item in searches_list:
+                if "category" in item.keys():
+                    category_list.append(item["category"])
     return category_list
 
 
-# Pega as categorias da lista de usuarios logados
-def get_categories_of_logged_users(dates):
-    category_list = []
-    searches_list = get_all_searches_by_logged_users(dates)
-    for item in searches_list:
-        try:
-            if item["category"]:
-                category_list.append(item["category"])
-        except KeyError:
-            pass
-    return category_list
-
-
-# Converte a lista de listas das categorias, para uma lista de strings
+# Converte a lista de listas das categorias, para uma lista de strings.
 def convert_category_to_string_list(list_values):
     list_of_strings_only = []
 
@@ -69,23 +51,32 @@ def convert_category_to_string_list(list_values):
     return list_of_strings_only
 
 
-# Conta quantas incidencias tem de cada string
+# Conta quantas incidencias tem de cada string.
 def string_count(list_to_count):
     counted_categories = {i: list_to_count.count(i) for i in list_to_count}
     return counted_categories
 
 
-def get_not_logged_users_report(dates):
-    total_list = get_categories_of_not_logged_users(dates)
-    converted_list = convert_category_to_string_list(total_list)
-    counted_list = string_count(converted_list)
-    counted_list = sorted(counted_list.items(), key=operator.itemgetter(1), reverse=True)
-    return counted_list
-
-
-def get_logged_users_report(dates):
-    total_list = get_categories_of_logged_users(dates)
-    converted_list = convert_category_to_string_list(total_list)
-    counted_list = string_count(converted_list)
-    counted_list = sorted(counted_list.items(), key=operator.itemgetter(1), reverse=True)
-    return counted_list
+# Busca os relatórios requisitados, pela data inicial e final informada,
+# e pela search_type que separa logados de não logados.
+def get_reports(dates, search_type):
+    if search_type not in SEARCH_TYPE_LIST:
+        return False, []
+    elif search_type == GET_LOGGED_USERS_REPORT:
+        try:
+            total_list = get_categories(dates, search_type)
+            converted_list = convert_category_to_string_list(total_list)
+            counted_list = string_count(converted_list)
+            counted_list = sorted(counted_list.items(), key=operator.itemgetter(1), reverse=True)
+            return True, counted_list
+        except Exception as error:
+            return False, f"Error: {error}"
+    elif search_type == GET_NOT_LOGGED_USERS_REPORT:
+        try:
+            total_list = get_categories(dates, search_type)
+            converted_list = convert_category_to_string_list(total_list)
+            counted_list = string_count(converted_list)
+            counted_list = sorted(counted_list.items(), key=operator.itemgetter(1), reverse=True)
+            return True, counted_list
+        except Exception as error:
+            return False, f"Error: {error}"

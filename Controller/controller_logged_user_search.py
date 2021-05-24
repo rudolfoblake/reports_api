@@ -1,9 +1,9 @@
 from datetime import datetime
-
 from flask import request
 from flask_restful import Resource
 from Database.auth import KEYS
 from Utils.search_engine import search_engine_utils
+from Utils.search_engine.search_engine_utils import GET_LOGGED_USERS_REPORT
 
 
 class ControllerLoggedInUserSearchReport(Resource):
@@ -21,6 +21,6 @@ class ControllerLoggedInUserSearchReport(Resource):
             body_request["report_header"]["current_date"] = current_date.strftime("%d/%m/%Y, %H:%M")
             request_body = request.get_json(force=True)
             dates = dict(initial_date=request_body["initial_date"], final_date=request_body["final_date"])
-            body_request["report_body"] = search_engine_utils.get_logged_users_report(dates)
+            body_request["report_body"] = search_engine_utils.get_reports(dates, GET_LOGGED_USERS_REPORT)
             response = dict(body_request, status=200, message="ok")
         return response
