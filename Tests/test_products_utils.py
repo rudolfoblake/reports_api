@@ -1,7 +1,5 @@
 from unittest import mock, TestCase
-import requests
 from Utils.products import products_utils
-from unittest.mock import Mock
 
 
 def mocked_requests_get(*args, **kwargs):
