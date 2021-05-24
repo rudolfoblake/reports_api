@@ -3,5 +3,5 @@
 API de Relatórios
 
 ## Colaboradores 
-Orlando Bitencourte
+Orlando Bitencourte <br>
 Rudolfo Blake
