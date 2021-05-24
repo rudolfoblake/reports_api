@@ -1,5 +1,6 @@
 import requests
 
+
 # Busca todos produtos com estoque vazio
 def get_all_products_with_empty_stock():
     response = requests.get("http://localhost:5000/books", headers={"Access-Key": "927c8626678666bdfc7cf3243dbaf682"})
@@ -11,11 +12,13 @@ def get_all_products_with_empty_stock():
                 list_response.append(item)
     return list_response
 
+
 # Busca todos os produtos
 def get_all_products():
     response = requests.get("http://localhost:5000/books", headers={"Access-Key": "927c8626678666bdfc7cf3243dbaf682"})
     response = response.json()
     return response
+
 
 # Calcula a margem de lucro de cada produto e a informa.
 def calculate_profit_by_product(data_values):

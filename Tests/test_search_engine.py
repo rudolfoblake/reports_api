@@ -52,3 +52,38 @@ class TestSearchEngineUtils(TestCase):
         test_data = ["teste1", "teste2", "teste2"]
         expected_data = dict(teste1=1, teste2=2)
         self.assertEqual(string_count(test_data), expected_data)
+
+    @mock.patch('Utils.search_engine.search_engine_utils.get_categories')
+    @mock.patch('Utils.search_engine.search_engine_utils.convert_category_to_string_list')
+    @mock.patch('Utils.search_engine.search_engine_utils.string_count')
+    def test_get_reports(self, mock_string_count, mock_convert_category_to_string_list, mock_get_categories):
+        mock_get_categories = [["teste1", "teste2"],["teste2"]]
+        mock_convert_category_to_string_list = ["teste1", "teste2", "teste2"]
+        mock_string_count = {'Ficção': 1, 'Ação': 2, 'Fantasia': 2}
+
+        self.assertTrue({'Ficção': 1, 'Ação': 2, 'Fantasia': 2}, (["teste1", "teste2", "teste2"],
+                                                                  [["teste1", "teste2"],["teste2"]]))
+
+
+
+# def get_reports(dates, search_type):
+#     if search_type not in SEARCH_TYPE_LIST:
+#         return False, []
+#     elif search_type == GET_LOGGED_USERS_REPORT:
+#         try:
+#             total_list = get_categories(dates, search_type)
+#             converted_list = convert_category_to_string_list(total_list)
+#             counted_list = string_count(converted_list)
+#             counted_list = sorted(counted_list.items(), key=operator.itemgetter(1), reverse=True)
+#             return True, counted_list
+#         except Exception as error:
+#             return False, f"Error: {error}"
+#     elif search_type == GET_NOT_LOGGED_USERS_REPORT:
+#         try:
+#             total_list = get_categories(dates, search_type)
+#             converted_list = convert_category_to_string_list(total_list)
+#             counted_list = string_count(converted_list)
+#             counted_list = sorted(counted_list.items(), key=operator.itemgetter(1), reverse=True)
+#             return True, counted_list
+#         except Exception as error:
+#             return False, f"Error: {error}"
