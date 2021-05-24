@@ -1,5 +1,3 @@
-from Controller.controller_logged_user_search import ControllerLoggedInUserSearchReport
-from Controller.controller_not_logged_user_search import ControllerNotLoggedUserSearchReport
 from Controller.controller_health_check import HealthCheck
 from Controller.controller_report_sales_most_sold_item import ReportSalesMostSoldItem
 from Controller.controller_report_sales_total import ReportSalesTotal
