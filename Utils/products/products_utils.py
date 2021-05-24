@@ -2,20 +2,18 @@ import requests
 
 # Busca todos produtos com estoque vazio
 def get_all_products_with_empty_stock():
-    response = requests.get("http://localhost:5000/books", headers={"Access-Key": "123456789"})
+    response = requests.get("http://localhost:5000/books", headers={"Access-Key": "927c8626678666bdfc7cf3243dbaf682"})
     response = response.json()
     list_response = []
     for item in response["result_data"]:
-        try:
+        if "item_quantity" in item.keys():
             if item["item_quantity"] == 0:
                 list_response.append(item)
-        except KeyError:
-            pass
     return list_response
 
 # Busca todos os produtos
 def get_all_products():
-    response = requests.get("http://localhost:5000/books", headers={"Access-Key": "123456789"})
+    response = requests.get("http://localhost:5000/books", headers={"Access-Key": "927c8626678666bdfc7cf3243dbaf682"})
     response = response.json()
     return response
 

@@ -8,3 +8,5 @@ omit =
     Database/*
     Utils\__init__.py
     Utils\sales\__init__.py
+
+exclude_lines = def get
