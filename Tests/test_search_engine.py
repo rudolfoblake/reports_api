@@ -16,16 +16,14 @@ class TestSearchEngineUtils(TestCase):
 
     # @mock.patch("Utils.search_engine.search_engine_utils.string_count", create=True)
     # @mock.patch("Utils.search_engine.search_engine_utils.convert_category_to_string_list", create=True)
-    # @mock.patch("Utils.search_engine.search_engine_utils.get_categories_of_logged_users", create=True)
-    # def test_get_logged_users_report(self, mock_get_categories_of_logged_users,
+    # @mock.patch("Utils.search_engine.search_engine_utils.GET_LOGGED_USERS_REPORT", create=True)
+    # def test_get_reports(self, mock_SEARCH_TYPE_LIST,
     #                                  mock_convert_category_to_string_list,
     #                                  mock_string_count):
-    #     mock_get_categories_of_logged_users.return_value = []
+    #     mock_SEARCH_TYPE_LIST.return_value = []
     #     mock_convert_category_to_string_list.return_value = []
     #     mock_string_count.return_value = dict()
     #     self.assertEqual(search_engine_utils.get_logged_users_report(dict()), [])
-
-
 
 
 
