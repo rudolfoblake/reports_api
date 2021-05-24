@@ -1,14 +1,15 @@
 from datetime import datetime
-
 from flask import request
 from flask_restful import Resource
 from Database.auth import KEYS
+from Utils.search_engine import search_engine_utils
+from Utils.search_engine.search_engine_utils import GET_NOT_LOGGED_USERS_REPORT
 
 
 class ControllerNotLoggedUserSearchReport(Resource):
 
     @staticmethod
-    def get():
+    def post():
         header = dict(request.headers)
 
         if "Access-Key" not in list(header.keys()) or header.get("Access-Key") not in list(KEYS.values()):
@@ -18,6 +19,8 @@ class ControllerNotLoggedUserSearchReport(Resource):
             body_request["report_header"]["title"] = "Relatórios de tags mais pesquisadas por usuários não logados"
             current_date = datetime.today()
             body_request["report_header"]["current_date"] = current_date.strftime("%d/%m/%Y, %H:%M")
-            body_request["report_body"] = search_engine_utils.get_all_searches_by_user_not_logged()
+            request_body = request.get_json(force=True)
+            dates = dict(initial_date=request_body["initial_date"], final_date=request_body["final_date"])
+            body_request["report_body"] = search_engine_utils.get_reports(dates, GET_NOT_LOGGED_USERS_REPORT)
             response = dict(body_request, status=200, message="ok")
         return response

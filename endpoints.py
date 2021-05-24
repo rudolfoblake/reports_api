@@ -1,4 +1,6 @@
-from Controller.controller_health_check import HealthCheck
+from Controller.controller_logged_user_search import ControllerLoggedInUserSearchReport
+from Controller.controller_not_logged_user_search import ControllerNotLoggedUserSearchReport
+from Controller.health_check_controller import HealthCheck
 from Controller.controller_report_sales_most_sold_item import ReportSalesMostSoldItem
 from Controller.controller_report_sales_total import ReportSalesTotal
 from Controller.controller_product_profit import ControllerProductReportProfit
@@ -23,7 +25,7 @@ def init_api(app):
     api.add_resource(ReportSalesTotal, "/reports/sales/total")
     api.add_resource(ControllerProductReportStock, "/reports/product/stock-report")
     api.add_resource(ControllerProductReportProfit, "/reports/product/profit-report")
-    api.add_resource(ControllerLoggedInUserSearchReport, "/reports/product/profit-report")
-    api.add_resource(ControllerNotLoggedUserSearchReport, "/reports/product/profit-report")
+    api.add_resource(ControllerLoggedInUserSearchReport, "/reports/searches/users/logged")
+    api.add_resource(ControllerNotLoggedUserSearchReport, "/reports/searches/users/not-logged")
 
     api.init_app(app)
