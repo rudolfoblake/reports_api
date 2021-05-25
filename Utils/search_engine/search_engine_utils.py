@@ -1,5 +1,6 @@
 import requests
 import operator
+from Database.auth import URL_SEARCH_ENGINE_API_REPORT
 
 GET_LOGGED_USERS_REPORT = 1
 GET_NOT_LOGGED_USERS_REPORT = 0
@@ -8,7 +9,7 @@ SEARCH_TYPE_LIST = [GET_LOGGED_USERS_REPORT, GET_NOT_LOGGED_USERS_REPORT]
 
 # Pega todos as buscas de usuários logados e não logados de acrodo com a Constante informada (search_type).
 def get_all_searches(dates, search_type):
-    response = requests.post("http://127.0.0.1:5000/get_all_searches", json=dates)
+    response = requests.post(URL_SEARCH_ENGINE_API_REPORT, json=dates)
     response = response.json()
     searches_list = []
 
