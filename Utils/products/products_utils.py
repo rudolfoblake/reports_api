@@ -1,9 +1,10 @@
 import requests
+from Database.auth import URL_PRODUCTS_API_REPORT
 
 
 # Busca todos produtos com estoque vazio
 def get_all_products_with_empty_stock():
-    response = requests.get("http://localhost:5000/books", headers={"Access-Key": "927c8626678666bdfc7cf3243dbaf682"})
+    response = requests.get(URL_PRODUCTS_API_REPORT, headers={"Access-Key": "927c8626678666bdfc7cf3243dbaf682"})
     response = response.json()
     list_response = []
     for item in response["result_data"]:
@@ -15,7 +16,7 @@ def get_all_products_with_empty_stock():
 
 # Busca todos os produtos
 def get_all_products():
-    response = requests.get("http://localhost:5000/books", headers={"Access-Key": "927c8626678666bdfc7cf3243dbaf682"})
+    response = requests.get(URL_PRODUCTS_API_REPORT, headers={"Access-Key": "927c8626678666bdfc7cf3243dbaf682"})
     response = response.json()
     return response
 

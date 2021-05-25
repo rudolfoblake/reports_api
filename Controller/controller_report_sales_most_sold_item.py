@@ -1,7 +1,7 @@
 import json
 from flask_restful import Resource
 from flask import request
-from Database.auth import KEYS
+from Database.auth import KEYS, URL_SALES_API_ORDERS_REPORTS_2
 from Utils.sales.utils_reports_extract_data import get_data_from_order_logs
 from Utils.sales.utils_reports_convert_data import convert_log_data
 
@@ -21,7 +21,7 @@ class ReportSalesMostSoldItem(Resource):
             dates = dict(initial_date=body_request["report_header"]["initial_date"],
                          final_date=body_request["report_header"]["final_date"])
 
-            data_info = get_data_from_order_logs(url="http://127.0.0.1:8000/orders/reports/2",
+            data_info = get_data_from_order_logs(url=URL_SALES_API_ORDERS_REPORTS_2,
                                                  filter_data=dates)
 
             if data_info["status"] is False:
