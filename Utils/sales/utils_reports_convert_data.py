@@ -42,8 +42,9 @@ def convert_lists(log_list: list) -> tuple:
 
     for index, value in enumerate(log_list):
         for item in value['order']['products']:
-            list_of_products.append(item)
-            ids.append(item['item_id'])
+            if "item_id" in item.keys():
+                list_of_products.append(item)
+                ids.append(item['item_id'])
 
     unique_ids = set(ids)
     return unique_ids, list_of_products
