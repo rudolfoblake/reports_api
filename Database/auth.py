@@ -1,4 +1,4 @@
-KEYS = dict(admin="927c8626678666bdfc7cf3243dbaf682")
+KEYS = dict(admin="927c8626678666bdfc7cf3243dbaf683")
 URL_SALES_API_ORDERS_REPORTS_1 = "http://127.0.0.1:8000/orders/reports/1"
 URL_SALES_API_ORDERS_REPORTS_2 = "http://127.0.0.1:8000/orders/reports/2"
 URL_PRODUCTS_API_REPORT = "http://localhost:5000/books"
