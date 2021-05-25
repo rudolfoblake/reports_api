@@ -1,4 +1,6 @@
 from unittest import mock, TestCase
+from unittest.mock import Mock
+
 from Utils.search_engine.search_engine_utils import get_all_searches, get_categories, convert_category_to_string_list, \
     string_count, get_reports
 
@@ -11,6 +13,7 @@ def mocked_requests_post(*args, **kwargs):
 
         def json(self):
             return self.json_data
+
     if args[0] == "http://127.0.0.1:5000/get_all_searches":
         return MockResponse(({'user_id': '23132321654'}, {'category': 'abc'}), 200)
     return MockResponse(None, 404)
@@ -19,7 +22,7 @@ def mocked_requests_post(*args, **kwargs):
 class TestSearchEngineUtils(TestCase):
 
     def test_convert_category_to_string_list(self):
-        test_data = [["teste1", "teste2"],["teste2"]]
+        test_data = [["teste1", "teste2"], ["teste2"]]
         expected = ["teste1", "teste2", "teste2"]
 
         self.assertEqual(expected, convert_category_to_string_list(test_data))
@@ -57,33 +60,38 @@ class TestSearchEngineUtils(TestCase):
     @mock.patch('Utils.search_engine.search_engine_utils.convert_category_to_string_list')
     @mock.patch('Utils.search_engine.search_engine_utils.string_count')
     def test_get_reports(self, mock_string_count, mock_convert_category_to_string_list, mock_get_categories):
-        mock_get_categories = [["teste1", "teste2"],["teste2"]]
+        mock_get_categories = [["teste1", "teste2"], ["teste2"]]
         mock_convert_category_to_string_list = ["teste1", "teste2", "teste2"]
         mock_string_count = {'Ficção': 1, 'Ação': 2, 'Fantasia': 2}
 
-        self.assertTrue({'Ficção': 1, 'Ação': 2, 'Fantasia': 2}, (["teste1", "teste2", "teste2"],
-                                                                  [["teste1", "teste2"],["teste2"]]))
+        dates = {"initial_date": "2021-01-01", "final_date": "2021-12-12"}
+        expected_data = []
 
+        # Not valid search_type
+        self.assertEqual(get_reports(dates, 4), (False, []))
 
+        # LOGGED USERS
+        self.assertTrue(get_reports(dates, 1), [(expected_data)])
+        self.assertEqual(get_reports(dates, 1), (True, expected_data))
 
-# def get_reports(dates, search_type):
-#     if search_type not in SEARCH_TYPE_LIST:
-#         return False, []
-#     elif search_type == GET_LOGGED_USERS_REPORT:
-#         try:
-#             total_list = get_categories(dates, search_type)
-#             converted_list = convert_category_to_string_list(total_list)
-#             counted_list = string_count(converted_list)
-#             counted_list = sorted(counted_list.items(), key=operator.itemgetter(1), reverse=True)
-#             return True, counted_list
-#         except Exception as error:
-#             return False, f"Error: {error}"
-#     elif search_type == GET_NOT_LOGGED_USERS_REPORT:
-#         try:
-#             total_list = get_categories(dates, search_type)
-#             converted_list = convert_category_to_string_list(total_list)
-#             counted_list = string_count(converted_list)
-#             counted_list = sorted(counted_list.items(), key=operator.itemgetter(1), reverse=True)
-#             return True, counted_list
-#         except Exception as error:
-#             return False, f"Error: {error}"
+        # NOT LOGGED USERS
+        search_type = 0
+        self.assertTrue(get_reports(dates, 0), [(expected_data)])
+        self.assertEqual(get_reports(dates, 0), (True, expected_data))
+
+    @mock.patch('Utils.search_engine.search_engine_utils.get_categories')
+    @mock.patch('Utils.search_engine.search_engine_utils.convert_category_to_string_list')
+    @mock.patch('Utils.search_engine.search_engine_utils.string_count', autospec=True)
+    def test_get_reports_exception(self, mock_string_count, mock_convert_category_to_string_list, mock_get_categories):
+        mock_get_categories = [["teste1", "teste2"], ["teste2"]]
+        mock_convert_category_to_string_list = ["teste1", "teste2", "teste2"]
+        mock_string_count.side_effect = [Exception, Exception]
+
+        dates = {"initial_date": "2021-01-01", "final_date": "2021-12-12"}
+        expected_data = (False, 'Error: ')
+
+        # EXCEPTION 1
+        self.assertEqual(get_reports(dates, 1), expected_data)
+
+        # EXCEPTION 2
+        self.assertEqual(get_reports(dates, 0), expected_data)
