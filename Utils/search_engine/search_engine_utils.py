@@ -44,11 +44,9 @@ def get_categories(dates, search_type):
 # Converte a lista de listas das categorias, para uma lista de strings.
 def convert_category_to_string_list(list_values):
     list_of_strings_only = []
-
     for l in list_values:
         for c in l:
             list_of_strings_only.append(c)
-
     return list_of_strings_only
 
 
