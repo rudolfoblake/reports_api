@@ -3,10 +3,8 @@ import requests
 
 def get_data_from_order_logs(url: str, filter_data: dict) -> dict:
     data = {'orders': None}
-    headers = {'content-type': 'application/json',
-               'Key': "eadc34b8d3d1463097e6df66dfabd462"}
     try:
-        res = requests.post(url, json=filter_data, headers=headers)
+        res = requests.post(url, json=filter_data)
         return_status = True
         return_msg = "ok"
         data = res.json()
