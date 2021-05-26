@@ -10,13 +10,13 @@ def transform_list_of_products(unique_ids: set, list_of_products: list) -> list:
     """
     unique_products = []
     for index, value in enumerate(unique_ids):
-        unique_products.append(dict(item_id=value, item_quantity=0, item_name="", total_price=0, prices=[]))
+        unique_products.append(dict(item_id=value, quantity_purchased=0, title="", total_price=0, prices=[]))
 
     for product in list_of_products:
         for index, value in enumerate(unique_products):
             if value["item_id"] == product["item_id"]:
-                unique_products[index]["item_name"] = product["item_name"]
-                unique_products[index]["item_quantity"] += product["item_quantity"]
+                unique_products[index]["title"] = product["title"]
+                unique_products[index]["quantity_purchased"] += product["quantity_purchased"]
                 unique_products[index]["total_price"] += product['item_price']
                 unique_products[index]["prices"].append(product["item_price"])
     return unique_products
@@ -63,4 +63,4 @@ def convert_log_data(log_list: list) -> list:
         product["median_price"] = calculate_median_price(product["prices"])
         del product["prices"]
 
-    return sorted(unique_products, key=lambda k: k["item_quantity"], reverse=True)
+    return sorted(unique_products, key=lambda k: k["quantity_purchased"], reverse=True)
