@@ -19,17 +19,17 @@ class TestUtilsSalesExtractData(TestCase):
                           '\\"_id\\": {\\n      \\"$oid\\": \\"60a3f9ef9f5cf6c89b8f22f1\\"\\n    },\\n    ' \
                           '\\"order\\": {\\n      \\"products\\": [\\n        {\\n          ' \
                           '\\"item_id\\": \\"60a3f\\",\\n          ' \
-                          '\\"item_name\\": \\"Harry Potter e a Camara Secreta Volume I\\",\\n          ' \
+                          '\\"title\\": \\"Harry Potter e a Camara Secreta Volume I\\",\\n          ' \
                           '\\"item_price\\": 10,\\n          ' \
-                          '\\"item_quantity\\": 1\\n        },\\n        {\\n          ' \
+                          '\\"quantity_purchased\\": 1\\n        },\\n        {\\n          ' \
                           '\\"item_id\\": \\"60a3g\\",\\n          ' \
-                          '\\"item_name\\": \\"Percy Jackson e os Olimpianos\\",\\n          ' \
+                          '\\"title\\": \\"Percy Jackson e os Olimpianos\\",\\n          ' \
                           '\\"item_price\\": 5,\\n          ' \
-                          '\\"item_quantity\\": 2\\n        },\\n        {\\n          ' \
+                          '\\"quantity_purchased\\": 2\\n        },\\n        {\\n          ' \
                           '\\"item_id\\": \\"60a3h\\",\\n          ' \
-                          '\\"item_name\\": \\"Biblia\\",\\n          ' \
+                          '\\"title\\": \\"Biblia\\",\\n          ' \
                           '\\"item_price\\": 5,\\n          ' \
-                          '\\"item_quantity\\": 500\\n        }\\n      ],\\n      ' \
+                          '\\"quantity_purchased\\": 500\\n        }\\n      ],\\n      ' \
                           '\\"user\\": {\\n        \\"user_id\\": {\\n          ' \
                           '\\"$oid\\": \\"60a3f9ef9f5cf6c89b8f22f1\\"\\n        },\\n        ' \
                           '\\"address\\": {\\n          ' \
@@ -49,17 +49,17 @@ class TestUtilsSalesExtractData(TestCase):
                           '\\"_id\\": {\\n      \\"$oid\\": \\"60a3fad49f5cf6c89b8f22f4\\"\\n    },\\n    ' \
                           '\\"order\\": {\\n      \\"products\\": [\\n        {\\n          ' \
                           '\\"item_id\\": \\"60a3f\\",\\n          ' \
-                          '\\"item_name\\": \\"Harry Potter e a Camara Secreta Volume I\\",\\n          ' \
+                          '\\"title\\": \\"Harry Potter e a Camara Secreta Volume I\\",\\n          ' \
                           '\\"item_price\\": 10,\\n          ' \
-                          '\\"item_quantity\\": 1\\n        },\\n        {\\n          ' \
+                          '\\"quantity_purchased\\": 1\\n        },\\n        {\\n          ' \
                           '\\"item_id\\": \\"60a3g\\",\\n          ' \
-                          '\\"item_name\\": \\"Percy Jackson e os Olimpianos\\",\\n          ' \
+                          '\\"title\\": \\"Percy Jackson e os Olimpianos\\",\\n          ' \
                           '\\"item_price\\": 5,\\n          ' \
-                          '\\"item_quantity\\": 2\\n        },\\n        {\\n          ' \
+                          '\\"quantity_purchased\\": 2\\n        },\\n        {\\n          ' \
                           '\\"item_id\\": \\"60a3h\\",\\n          ' \
-                          '\\"item_name\\": \\"Biblia\\",\\n          ' \
+                          '\\"title\\": \\"Biblia\\",\\n          ' \
                           '\\"item_price\\": 5,\\n          ' \
-                          '\\"item_quantity\\": 500\\n        }\\n      ],\\n      ' \
+                          '\\"quantity_purchased\\": 500\\n        }\\n      ],\\n      ' \
                           '\\"user\\": {\\n        \\"user_id\\": {\\n          ' \
                           '\\"$oid\\": \\"60a3fad49f5cf6c89b8f22f4\\"\\n        },\\n        ' \
                           '\\"address\\": {\\n          ' \
@@ -76,13 +76,13 @@ class TestUtilsSalesExtractData(TestCase):
                           '\\"_id\\": {\\n      \\"$oid\\": \\"60a3fb079f5cf6c89b8f22f7\\"\\n    },\\n    ' \
                           '\\"order\\": {\\n      \\"products\\": [\\n        {\\n          ' \
                           '\\"item_id\\": \\"60a3f\\",\\n          ' \
-                          '\\"item_name\\": \\"Harry Potter e a Camara Secreta Volume I\\",\\n          ' \
+                          '\\"title\\": \\"Harry Potter e a Camara Secreta Volume I\\",\\n          ' \
                           '\\"item_price\\": 10,\\n          ' \
-                          '\\"item_quantity\\": 1\\n        },\\n        {\\n          ' \
+                          '\\"quantity_purchased\\": 1\\n        },\\n        {\\n          ' \
                           '\\"item_id\\": \\"60a3g\\",\\n          ' \
-                          '\\"item_name\\": \\"Percy Jackson e os Olimpianos\\",\\n          ' \
+                          '\\"title\\": \\"Percy Jackson e os Olimpianos\\",\\n          ' \
                           '\\"item_price\\": 5,\\n          ' \
-                          '\\"item_quantity\\": 2\\n        }\\n      ],\\n      ' \
+                          '\\"quantity_purchased\\": 2\\n        }\\n      ],\\n      ' \
                           '\\"user\\": {\\n        \\"user_id\\": {\\n          ' \
                           '\\"$oid\\": \\"60a3fb079f5cf6c89b8f22f7\\"\\n        },\\n        ' \
                           '\\"address\\": {\\n          \\"address_state\\": \\"AC\\"\\n        }\\n      },\\n      ' \
